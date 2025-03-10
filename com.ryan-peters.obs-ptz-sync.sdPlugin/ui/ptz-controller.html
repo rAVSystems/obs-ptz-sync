@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <title>PTZ Controller Settings</title>
+    <meta charset="utf-8" />
+    <script src="https://sdpi-components.dev/releases/v3/sdpi-components.js"></script>
+</head>
+
+<body>
+    <!--
+        Learn more about property inspector components at https://sdpi-components.dev/docs/components
+    -->
+    <sdpi-item label="Id">
+        <sdpi-item label="Mode Id">
+            <sdpi-textfield
+                setting="id"
+                pattern="/^[a-z ,.'-]+$/i"
+                placeholder="PTZ Mode"
+                required>
+            </sdpi-textfield>
+        </sdpi-item>
+    </sdpi-item>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+{
+	"Name": "OBS PTZ SYNC",
+	"Version": "0.1.0.0",
+	"Author": "Ryan Peters",
+	"Actions": [
+		{
+			"Name": "PtzController",
+			"UUID": "com.ryan-peters.obs-ptz-sync.ptzcontroller",
+			"Icon": "imgs/actions/counter/icon",
+			"Tooltip": "Selects a PTZ Controller Mode",
+			"PropertyInspectorPath": "ui/ptz-controller.html",
+			"DisableAutomaticStates": true,
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "",
+					"TitleAlignment": "middle"
+				},
+				{
+					"Image": "",
+					"TitleAlignment": "top"
+				}
+			]
+		}
+	],
+	"Category": "OBS PTZ SYNC",
+	"CategoryIcon": "imgs/plugin/category-icon",
+	"CodePath": "bin/plugin.js",
+	"Description": "Syncs PTZ Controller to OBS",
+	"Icon": "imgs/plugin/marketplace",
+	"SDKVersion": 2,
+	"Software": {
+		"MinimumVersion": "6.4"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "12"
+		},
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Nodejs": {
+		"Version": "20",
+		"Debug": "enabled"
+	},
+	"UUID": "com.ryan-peters.obs-ptz-sync"
+}
