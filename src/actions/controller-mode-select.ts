@@ -10,6 +10,7 @@ export class PtzController extends SingletonAction<PtzControllerSettings> {
         super();
         streamDeck.settings.onDidReceiveGlobalSettings((ev) => {
             // streamDeck.logger.trace("global " + ev.settings.buttonSelected);
+            
         });
     }
 
@@ -42,29 +43,32 @@ export class PtzController extends SingletonAction<PtzControllerSettings> {
             }
         }));
 
-        await ev.action.setTitle(`${settings.id}`);
         await streamDeck.settings.setGlobalSettings({
             buttonSelected: settings.id,
         });
 
         await streamDeck.settings.getGlobalSettings();
 
+        streamDeck.logger.error("Key pressed with settings: " + JSON.stringify(settings));
         // Construct the URL for the HTTP GET request
-        const url = `http://${settings.controllerIp}/cgi-bin/aw_cam?cmd=XCN:01:${settings.controlId}&res=1`;
+        if (settings.controllerIp && settings.controlId) {
+            const url = `http://${settings.controllerIp}/cgi-bin/aw_cam?cmd=XCN:01:${settings.controlId}&res=1`;
+            streamDeck.logger.info("Constructed URL: " + url);
 
-        // Perform the HTTP GET request
-        try {
-            const response = await fetch(url);
+            try {
+                const response = await fetch(url);
             
-            // Optionally handle the response
-            if (response.ok) {
-                const data = await response.text(); // or .json() if it's JSON data
-                streamDeck.logger.info("Request successful: " + data);
-            } else {
-                streamDeck.logger.error("Request failed: " + response.statusText);
+                if (response.ok) {
+                    const data = await response.text(); // or .json() if it's JSON data
+                    streamDeck.logger.info("Request successful: " + data);
+                } else {
+                    streamDeck.logger.error("Request failed: " + response.statusText);
+                }
+            } catch (error) {
+                streamDeck.logger.error("Error performing HTTP request: " + error);
             }
-        } catch (error) {
-            streamDeck.logger.error("Error performing HTTP request: " + error);
+        } else {
+            streamDeck.logger.error("controllerIp or controlId not provided in the settings.");
         }
     }
 }
