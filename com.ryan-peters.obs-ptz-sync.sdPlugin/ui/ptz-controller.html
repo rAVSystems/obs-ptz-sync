@@ -12,14 +12,28 @@
         Learn more about property inspector components at https://sdpi-components.dev/docs/components
     -->
     <sdpi-item label="Id">
-        <sdpi-item label="Mode Id">
             <sdpi-textfield
                 setting="id"
                 pattern="/^[a-z ,.'-]+$/i"
-                placeholder="PTZ Mode"
+                placeholder="PTZ Id"
                 required>
             </sdpi-textfield>
-        </sdpi-item>
+    </sdpi-item>
+    <sdpi-item label="controllerIP">
+            <sdpi-textfield
+                setting="controller"
+                pattern="/^[a-z ,.'-]+$/i"
+                placeholder="192.168.1.101"
+                required>
+            </sdpi-textfield>
+    </sdpi-item>
+    <sdpi-item label="Control ID">
+            <sdpi-textfield
+                setting="controlID"
+                pattern="/^[a-z ,.'-]+$/i"
+                placeholder="0"
+                required>
+            </sdpi-textfield>
     </sdpi-item>
 </body>
 

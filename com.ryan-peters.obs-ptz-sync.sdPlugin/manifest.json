@@ -19,8 +19,8 @@
 					"TitleAlignment": "middle"
 				},
 				{
-					"Image": "",
-					"TitleAlignment": "top"
+					"Image": "imgs/plugin/selected_background",
+					"TitleAlignment": "middle"
 				}
 			]
 		}
