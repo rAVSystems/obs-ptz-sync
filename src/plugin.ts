@@ -2,6 +2,8 @@ import streamDeck, { LogLevel } from "@elgato/streamdeck";
 import { PtzController } from "./actions/controller-mode-select";
 import WebSocket from 'ws';
 
+streamDeck.logger.setLevel(LogLevel.INFO);
+streamDeck.actions.registerAction(new PtzController());
 async function connectToOBSWebSocket() {
     /*
     const obsWebSocketUrl = 'ws://localhost:4455';
@@ -47,11 +49,16 @@ async function connectToOBSWebSocket() {
     return ws;
     */
 }
+streamDeck.settings.onDidReceiveGlobalSettings((ev) => {
+        const selectedId = ev.settings.buttonSelected;
+        streamDeck.logger.info("Camera Selected: " + selectedId);
+        for (const actionInstance of streamDeck.actions) {
+            actionInstance.getSettings().then((settings) => {
+                if (actionInstance.isKey()) {
+                    actionInstance.setState(settings.id === selectedId ? 1 : 0);
+                }
+            });
+        }
+    });
 
-
-
-streamDeck.logger.setLevel(LogLevel.TRACE);
-streamDeck.actions.registerAction(new PtzController());
-streamDeck.connect().then(() => {
-    //connectToOBSWebSocket();
-});
+streamDeck.connect();
